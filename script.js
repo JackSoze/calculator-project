@@ -6,7 +6,11 @@ function sum ([...theArgs]) {
     return theArgsSum;
 }
 
-function subtract ([a,b]) {
+const add = function(a,b) {
+    return (a+b);
+  };
+
+function subtract (a,b) {
     return a - b;
 }
 
@@ -18,6 +22,30 @@ function multiply ([...theArgs]) {
   return answer;
 }
 
-function divide ([a,b]) {
+function multiplySingles (a,b) {
+    return a*b;
+}
+
+function divide (a,b) {
     return a/b;
+}
+
+//operate function
+function operate (a, operator, b) {
+    switch (operator) {
+        case '+':
+            return add(a,b);
+            break;
+        case '-':
+            return subtract(a,b);
+            break;
+        case '/':
+            return divide(a,b);
+            break;
+        case '*':
+            return multiplySingles(a,b);
+            break;
+        default:
+            console.log('jack')
+    }
 }
