@@ -1,0 +1,68 @@
+body {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.calculator {
+    display: flex;
+    flex-flow: column nowrap;
+    height: 100vh;
+    width: 600px;
+    background-color: blueviolet;
+    align-self: center;
+    border: 2px solid black;
+}
+
+.results-header {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    height: 100px;
+    background-color: aliceblue;
+    justify-content: space-around;
+    align-items: flex-end;
+      padding-right: 20px;
+}
+
+.results-header .operation {
+    font-size: 20px;
+}
+
+.results-header .results {
+    font-size: 30px;
+}
+
+.controls {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.numbers {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+button {
+    padding: 20px 50px;
+    border: .4rem solid blue;
+    border-radius: 10px;
+}
+
+.number {
+  border: .4rem solid black;
+  border-radius: .5rem;
+  margin: 10px;
+  font-size: 1.5rem;
+  padding: 1rem .5rem;
+  transition: all .07s ease;
+  width: 150px;
+  text-align: center;
+  color: white;
+  background: rgba(0,0,0,0.4);
+  text-shadow: 0 0 .5rem black
+}
+
+.number .number-last {
+    
+}
