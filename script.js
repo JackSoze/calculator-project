@@ -49,3 +49,15 @@ function operate (a, operator, b) {
             console.log('jack')
     }
 }
+
+//function to populate the display
+let operationNumbers = []
+const numbers = document.querySelectorAll('.number');
+numbers.forEach(number => number.addEventListener('click', function(e){
+    console.log(e.target.outerText)
+    const display = document.querySelector('.operation');
+    const content = document.createElement('div');
+    content.textContent = `${e.target.outerText}`
+    display.appendChild(content)
+    operationNumbers.push(`${e.target.outerText}`)
+}))

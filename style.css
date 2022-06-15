@@ -26,6 +26,8 @@ body {
 
 .results-header .operation {
     font-size: 20px;
+    display: flex;
+    flex-flow: row nowrap;
 }
 
 .results-header .results {
@@ -63,6 +65,3 @@ button {
   text-shadow: 0 0 .5rem black
 }
 
-.number .number-last {
-    
-}
