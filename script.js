@@ -50,14 +50,29 @@ function operate (a, operator, b) {
     }
 }
 
-//function to populate the display
+//function to populate the display and store clicked number
 let operationNumbers = []
 const numbers = document.querySelectorAll('.number');
 numbers.forEach(number => number.addEventListener('click', function(e){
-    console.log(e.target.outerText)
+    console.log((e.target.outerText))
     const display = document.querySelector('.operation');
     const content = document.createElement('div');
-    content.textContent = `${e.target.outerText}`
+    content.textContent = (`${e.target.outerText}`)
     display.appendChild(content)
-    operationNumbers.push(`${e.target.outerText}`)
+    operationNumbers.push(parseInt(`${e.target.outerText}`))
 }))
+//function to populate and store the symbols
+// const numbers = document.querySelectorAll('.number');
+// numbers.forEach(number => number.addEventListener('click', function(e){
+//     console.log((e.target.outerText))
+//     const display = document.querySelector('.operation');
+//     const content = document.createElement('div');
+//     content.textContent = (`${e.target.outerText}`)
+//     display.appendChild(content)
+//     operationNumbers.push(`${e.target.outerText}`)
+
+//function to run the equals operator
+const equals = document.querySelector('.equals');
+equals.addEventListener('click',function(e) {
+    console.log(operate([operationNumbers]));
+})

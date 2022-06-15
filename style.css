@@ -45,6 +45,22 @@ body {
     flex-flow: row wrap;
 }
 
+.equals {
+    border: .4rem solid rgb(250, 245, 245);
+  border-radius: .5rem;
+  margin: 10px;
+  font-size: 1.5rem;
+  padding: 1rem .5rem;
+  transition: all .07s ease;
+  width: 150px;
+  text-align: center;
+  color: white;
+  background: rgba(110, 59, 59, 0.4);
+  text-shadow: 0 0 .5rem black
+}
+
+ 
+
 button {
     padding: 20px 50px;
     border: .4rem solid blue;
