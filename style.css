@@ -32,6 +32,8 @@ body {
 
 .results-header .results {
     font-size: 30px;
+    display: flex;
+    flex-flow: row nowrap;
 }
 
 .controls {
@@ -46,7 +48,7 @@ body {
 }
 
 .equals {
-    border: .4rem solid rgb(250, 245, 245);
+  border: .4rem solid rgb(250, 245, 245);
   border-radius: .5rem;
   margin: 10px;
   font-size: 1.5rem;

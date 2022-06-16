@@ -51,7 +51,17 @@ function operate ([a, operator, b]) {
 }
 
 //function to populate the display and store clicked number
-let operationNumbers = []
+let operationNumbers = [];
+let numberStore = [];
+
+function conversion ([numbers]) {
+    let jackie = numbers.join('')
+    console.log(jackie);
+    return parseInt(jackie);
+}
+
+
+
 const numbers = document.querySelectorAll('.number');
 numbers.forEach(number => number.addEventListener('click', function(e){
     console.log((e.target.outerText))
@@ -59,7 +69,7 @@ numbers.forEach(number => number.addEventListener('click', function(e){
     const content = document.createElement('div');
     content.textContent = (`${e.target.outerText}`)
     display.appendChild(content)
-    operationNumbers.push(parseInt(`${e.target.outerText}`))
+    numberStore.push((parseInt(`${e.target.outerText}`)))
 }))
 //function to populate and store the symbols
 const controls = document.querySelectorAll('.control');
@@ -69,10 +79,21 @@ controls.forEach(controller => controller.addEventListener('click', function(e){
     const content = document.createElement('div');
     content.textContent = (`${e.target.outerText}`)
     display.appendChild(content)
+    let current = conversion([numberStore]);//TODO: simplify this here
+    operationNumbers.push(current);
+    numberStore = [];
     operationNumbers.push(`${e.target.outerText}`)
 }))
 //function to run the equals operator
 const equals = document.querySelector('.equals');
 equals.addEventListener('click',function(e) {
+    let current = conversion([numberStore]);
+    operationNumbers.push(current);
+    numberStore = [];
+    const answer = document.querySelector('.results');
+    const content = document.createElement('div');
+    content.textContent = `${operate(operationNumbers)}`;
+    answer.appendChild(content);
     console.log(operate(operationNumbers));
 })
+
