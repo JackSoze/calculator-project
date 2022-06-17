@@ -54,10 +54,10 @@ function operate ([a, operator, b]) {
 let operationNumbers = [];
 let numberStore = [];
 
-function conversion ([numbers]) {
-    let jackie = numbers.join('')
-    console.log(jackie);
-    return parseInt(jackie);
+function conversion ([numbers]) {//clicked numbers pushed to numberstore as an array
+    let temp = numbers.join('')//...then converted into one number 
+    console.log(temp);         //...then pushed into the operationNumbers array
+    return parseInt(temp);
 }
 
 
