@@ -53,10 +53,10 @@ function operate ([a, operator, b]) {
 //function to populate the display and store clicked number
 let operationNumbers = [];
 let numberStore = [];
+let currentAnswer = [];
 
 function conversion ([numbers]) {//clicked numbers pushed to numberstore as an array
-    let temp = numbers.join('')//...then converted into one number 
-    console.log(temp);         //...then pushed into the operationNumbers array
+    let temp = numbers.join('')//...then converted into one number         //...then pushed into the operationNumbers array
     return parseInt(temp);
 }
 
@@ -64,24 +64,37 @@ function conversion ([numbers]) {//clicked numbers pushed to numberstore as an a
 
 const numbers = document.querySelectorAll('.number');
 numbers.forEach(number => number.addEventListener('click', function(e){
-    console.log((e.target.outerText))
     const display = document.querySelector('.operation');
     const content = document.createElement('div');
     content.textContent = (`${e.target.outerText}`)
     display.appendChild(content)
-    numberStore.push((parseInt(`${e.target.outerText}`)))
+    numberStore.push((parseInt(`${e.target.outerText}`)))//pushed to numberStore as single digit arrays
 }))
 //function to populate and store the symbols
 const controls = document.querySelectorAll('.control');
 controls.forEach(controller => controller.addEventListener('click', function(e){
-    console.log((e.target.outerText))
+   
+
     const display = document.querySelector('.operation');
     const content = document.createElement('div');
+   
+    
     content.textContent = (`${e.target.outerText}`)
-    display.appendChild(content)
-    let current = conversion([numberStore]);//TODO: simplify this here
-    operationNumbers.push(current);
-    numberStore = [];
+    display.appendChild(content);
+    let currentsaa = function() {
+        if (conversion([numberStore]) == undefined) {
+            return numberStore[0];
+        } else {
+            return conversion([numberStore]);
+        }
+
+    } //TODO: simplify this here
+    current = currentsaa();
+    console.log(current)
+    operationNumbers.push(current);//converted to multidigits and pushed to opnumbers
+    numberStore = [];//resets the number store array0
+    //numberStore.push(currentAnswer[0]) //* changes here
+    currentAnswer = [];
     operationNumbers.push(`${e.target.outerText}`)
 }))
 //function to run the equals operator
@@ -90,10 +103,14 @@ equals.addEventListener('click',function(e) {
     let current = conversion([numberStore]);
     operationNumbers.push(current);
     numberStore = [];
+    
     const answer = document.querySelector('.results');
     const content = document.createElement('div');
     content.textContent = `${operate(operationNumbers)}`;
+    currentAnswer.push(parseInt(`${operate(operationNumbers)}`));
+    numberStore.push(currentAnswer[0]);
     answer.appendChild(content);
-    console.log(operate(operationNumbers));
+    operationNumbers = [];
+    
 })
 
