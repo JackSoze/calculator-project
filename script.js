@@ -115,6 +115,11 @@ controls.forEach(controller => controller.addEventListener('click', function(e){
 //function to run the equals operator
 const equals = document.querySelector('.equals');
 equals.addEventListener('click',function(e) {
+    let element = document.querySelector(".results");
+    while (element.firstChild) {
+     element.removeChild(element.firstChild);
+    }
+
     let current = conversion([numberStore]);
     operationNumbers.push(current);
     numberStore = [];
