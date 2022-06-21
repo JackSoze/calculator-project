@@ -75,46 +75,55 @@ numbers.forEach(number => number.addEventListener('click', function(e){
 const controls = document.querySelectorAll('.control');
 controls.forEach(controller => controller.addEventListener('click', function(e){
    
-
     const display = document.querySelector('.operation');
-
-    const returnToDisplay = document.createElement('div');
+    const firstOperand = document.createElement('div');
 
     const content = document.createElement('div');
-
     content.classList.add('remove')
-   
+
+    let useAsEquals = function () { //use operator as equals on stringed calcs
+        if (operationNumbers.length == '2') {
+            getEquals();
+        }
+        return; 
+    };
     
-    let currentsaa = function() {
-        if (conversion([numberStore]) == undefined) {
-            return numberStore[0];
-        } else {
+    useAsEquals(); 
+   
+    let determineCurrent = function() { //fixes the current value to either 
+        if (conversion([numberStore]) == undefined) { //..the joined numbers 
+            return numberStore[0];                    //..from numberstore or 
+        } else {                                      //..the current answer from an operation
             return conversion([numberStore]);
         }
 
-    } //TODO: simplify this here
-    current = currentsaa();
+    } 
+    current = determineCurrent();
 
-    let element = document.querySelector(".operation");
+    let element = document.querySelector(".operation");// clear operation display
     while (element.firstChild) {
      element.removeChild(element.firstChild);
     }
-    
+
     operationNumbers.push(current);//converted to multidigits and pushed to opnumbers
-    numberStore = [];//resets the number store array0
+    numberStore = [];//resets the number store array to 0
     
     currentAnswer = [];
     operationNumbers.push(`${e.target.outerText}`)
-    returnToDisplay.textContent = operationNumbers[0];
-    display.appendChild(returnToDisplay)
-
+    firstOperand.textContent = operationNumbers[0];
+    display.appendChild(firstOperand);
 
     content.textContent = (`${e.target.outerText}`)
     display.appendChild(content);
+
 }))
 //function to run the equals operator
 const equals = document.querySelector('.equals');
 equals.addEventListener('click',function(e) {
+    getEquals();
+})
+
+function getEquals() {
     let element = document.querySelector(".results");
     while (element.firstChild) {
      element.removeChild(element.firstChild);
@@ -130,6 +139,7 @@ equals.addEventListener('click',function(e) {
     numberStore.push(currentAnswer[0]);
     answer.appendChild(content);
     operationNumbers = [];
-    
-})
+}
+
+const clearEverything = document.addEventListener
 
