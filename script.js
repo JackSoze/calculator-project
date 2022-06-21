@@ -66,6 +66,7 @@ const numbers = document.querySelectorAll('.number');
 numbers.forEach(number => number.addEventListener('click', function(e){
     const display = document.querySelector('.operation');
     const content = document.createElement('div');
+    content.classList.add('remove')
     content.textContent = (`${e.target.outerText}`)
     display.appendChild(content)
     numberStore.push((parseInt(`${e.target.outerText}`)))//pushed to numberStore as single digit arrays
@@ -76,11 +77,14 @@ controls.forEach(controller => controller.addEventListener('click', function(e){
    
 
     const display = document.querySelector('.operation');
+
+    const returnToDisplay = document.createElement('div');
+
     const content = document.createElement('div');
+
+    content.classList.add('remove')
    
     
-    content.textContent = (`${e.target.outerText}`)
-    display.appendChild(content);
     let currentsaa = function() {
         if (conversion([numberStore]) == undefined) {
             return numberStore[0];
@@ -90,12 +94,23 @@ controls.forEach(controller => controller.addEventListener('click', function(e){
 
     } //TODO: simplify this here
     current = currentsaa();
-    console.log(current)
+
+    let element = document.querySelector(".operation");
+    while (element.firstChild) {
+     element.removeChild(element.firstChild);
+    }
+    
     operationNumbers.push(current);//converted to multidigits and pushed to opnumbers
     numberStore = [];//resets the number store array0
-    //numberStore.push(currentAnswer[0]) //* changes here
+    
     currentAnswer = [];
     operationNumbers.push(`${e.target.outerText}`)
+    returnToDisplay.textContent = operationNumbers[0];
+    display.appendChild(returnToDisplay)
+
+
+    content.textContent = (`${e.target.outerText}`)
+    display.appendChild(content);
 }))
 //function to run the equals operator
 const equals = document.querySelector('.equals');
@@ -103,7 +118,6 @@ equals.addEventListener('click',function(e) {
     let current = conversion([numberStore]);
     operationNumbers.push(current);
     numberStore = [];
-    
     const answer = document.querySelector('.results');
     const content = document.createElement('div');
     content.textContent = `${operate(operationNumbers)}`;
