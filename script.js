@@ -61,7 +61,6 @@ function conversion ([numbers]) {//clicked numbers pushed to numberstore as an a
 }
 
 
-
 const numbers = document.querySelectorAll('.number');
 numbers.forEach(number => number.addEventListener('click', function(e){
     const display = document.querySelector('.operation');
@@ -141,5 +140,24 @@ function getEquals() {
     operationNumbers = [];
 }
 
-const clearEverything = document.addEventListener
+function clearEverything () {
+    const clearEverything = document.querySelector('.clear');
+    clearEverything.addEventListener('click', function(e) {
+    operationNumbers = [];
+    numberStore = [];
+    currentAnswer = [];
+
+    let element = document.querySelector(".operation");// clear operation display
+    while (element.firstChild) {
+     element.removeChild(element.firstChild);
+    }
+
+    let element2 = document.querySelector(".results");// clear results display
+    while (element2.firstChild) {
+     element2.removeChild(element2.firstChild);
+    }
+})
+}
+
+clearEverything();
 
