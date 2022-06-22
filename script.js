@@ -46,7 +46,7 @@ function operate ([a, operator, b]) {
             return multiplySingles(a,b);
             break;
         default:
-            console.log('jack')
+            console.log('syntax error')
     }
 }
 
@@ -60,9 +60,10 @@ function conversion ([numbers]) {//clicked numbers pushed to numberstore as an a
     return parseInt(temp);
 }
 
-
-const numbers = document.querySelectorAll('.number');
-numbers.forEach(number => number.addEventListener('click', function(e){
+//function to get number, initiate operations and display number
+function getNumber() {
+    const numbers = document.querySelectorAll('.number');
+    numbers.forEach(number => number.addEventListener('click', function(e){
     const display = document.querySelector('.operation');
     const content = document.createElement('div');
     content.classList.add('remove')
@@ -70,9 +71,11 @@ numbers.forEach(number => number.addEventListener('click', function(e){
     display.appendChild(content)
     numberStore.push((parseInt(`${e.target.outerText}`)))//pushed to numberStore as single digit arrays
 }))
+}
 //function to populate and store the symbols
-const controls = document.querySelectorAll('.control');
-controls.forEach(controller => controller.addEventListener('click', function(e){
+function operators () {
+    const controls = document.querySelectorAll('.control');
+    controls.forEach(controller => controller.addEventListener('click', function(e){
    
     const display = document.querySelector('.operation');
     const firstOperand = document.createElement('div');
@@ -116,13 +119,16 @@ controls.forEach(controller => controller.addEventListener('click', function(e){
     display.appendChild(content);
 
 }))
+}
 //function to run the equals operator
-const equals = document.querySelector('.equals');
-equals.addEventListener('click',function(e) {
+function doEqualsOperator() { //this runs the equals button
+    const equals = document.querySelector('.equals');
+    equals.addEventListener('click',function(e) {
     getEquals();
 })
+} 
 
-function getEquals() {
+function getEquals() {//this does the equals operation and allows us to use operators to run  equals
     let element = document.querySelector(".results");
     while (element.firstChild) {
      element.removeChild(element.firstChild);
@@ -133,13 +139,21 @@ function getEquals() {
     numberStore = [];
     const answer = document.querySelector('.results');
     const content = document.createElement('div');
-    content.textContent = `${operate(operationNumbers)}`;
+    
+    if (`${operate(operationNumbers)}` == 'undefined') {
+        content.textContent = 'syntax error'
+    } else {
+        let roundedAnswer = Math.round((operate(operationNumbers)+ Number.EPSILON) * 100) / 100;
+        content.textContent = `${roundedAnswer}`;
+        console.log(roundedAnswer)
+    }
+    // content.textContent = `${operate(operationNumbers)}`;
     currentAnswer.push(parseInt(`${operate(operationNumbers)}`));
     numberStore.push(currentAnswer[0]);
     answer.appendChild(content);
     operationNumbers = [];
 }
-
+//function to clear everything
 function clearEverything () {
     const clearEverything = document.querySelector('.clear');
     clearEverything.addEventListener('click', function(e) {
@@ -159,5 +173,12 @@ function clearEverything () {
 })
 }
 
-clearEverything();
+function calculator() {
+    getNumber();
+    operators();
+    doEqualsOperator();
+    clearEverything();
+}
+
+calculator();
 
