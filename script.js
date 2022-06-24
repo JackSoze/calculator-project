@@ -61,7 +61,7 @@ function conversion ([numbers]) {//clicked numbers pushed to numberstore as an a
 }
 
 //function to get number, initiate operations and display number
-function getNumber() {
+function getNumberOnScreen() {
     const numbers = document.querySelectorAll('.number');
     numbers.forEach(number => number.addEventListener('click', function(e){
     const display = document.querySelector('.operation');
@@ -71,6 +71,18 @@ function getNumber() {
     display.appendChild(content)
     numberStore.push((parseInt(`${e.target.outerText}`)))//pushed to numberStore as single digit arrays
 }))
+}
+
+function getNumberOnKeyboard(e) {
+    // const number = document.querySelector(`.number[data-key='${e.keyCode}']`);
+
+    const display = document.querySelector('.operation');
+    const content = document.createElement('div');
+    content.classList.add('remove');
+    let thisContent = parseInt(`${e.key}`)
+    content.textContent = (`${thisContent}`)
+    display.appendChild(content)
+    numberStore.push((parseInt(`${e.key}`)))
 }
 //function to populate and store the symbols
 function operators () {
@@ -121,12 +133,16 @@ function operators () {
 }))
 }
 //function to run the equals operator
-function doEqualsOperator() { //this runs the equals button
+function doEqualsOperatorScreen() { //this runs the equals button
     const equals = document.querySelector('.equals');
     equals.addEventListener('click',function(e) {
     getEquals();
 })
 } 
+
+function doEqualsKeyboardKey (e) {
+    getEquals();
+}
 
 function getEquals() {//this does the equals operation and allows us to use operators to run  equals
     let element = document.querySelector(".results");
@@ -145,7 +161,6 @@ function getEquals() {//this does the equals operation and allows us to use oper
     } else {
         let roundedAnswer = Math.round((operate(operationNumbers)+ Number.EPSILON) * 100) / 100;
         content.textContent = `${roundedAnswer}`;
-        console.log(roundedAnswer)
     }
     // content.textContent = `${operate(operationNumbers)}`;
     currentAnswer.push(parseInt(`${operate(operationNumbers)}`));
@@ -174,11 +189,18 @@ function clearEverything () {
 }
 
 function calculator() {
-    getNumber();
+    getNumberOnScreen();
     operators();
-    doEqualsOperator();
+    doEqualsOperatorScreen();
     clearEverything();
 }
 
 calculator();
 
+window.addEventListener('keydown',function(e) {
+  if (e.key != '=') {
+    getNumberOnKeyboard(e);
+  } else if (e.key == '=' || e.key == 'enter') {
+    doEqualsKeyboardKey (e);
+  }
+})
