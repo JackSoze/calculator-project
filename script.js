@@ -58,7 +58,7 @@ let currentAnswer = [];
 
 function conversion ([numbers]) {//clicked numbers pushed to numberstore as an array
     let temp = numbers.join('')//...then converted into one number         //...then pushed into the operationNumbers array
-    return parseInt(temp);
+    return parseFloat(temp);
 }
 
 //function to get number, initiate operations and display number
@@ -70,21 +70,35 @@ function getNumberOnScreen() {
     content.classList.add('remove')
     content.textContent = (`${e.target.outerText}`)
     display.appendChild(content)
-    numberStore.push((parseInt(`${e.target.outerText}`)))//pushed to numberStore as single digit arrays
+    numberStore.push((parseFloat(`${e.target.outerText}`)))//pushed to numberStore as single digit arrays
 }))
 }
 
 function getNumberOnKeyboard(e) {
-    const isNumber = isFinite(e.key);
-    if (!isNumber) {return}
+    const isNumber = isFinite(e.key) 
+
+    if (e.key == '.' ) { // to push . without parsing it
     const display = document.querySelector('.operation');
     const content = document.createElement('div');
     content.classList.add('remove');
     
-    let thisContent = parseInt(`${e.key}`)
+    let thisContent = (`${e.key}`)
     content.textContent = (`${thisContent}`)
     display.appendChild(content)
-    numberStore.push((parseInt(`${e.key}`)))
+    numberStore.push(((`${e.key}`)))
+    } else if (!isNumber) { //if input isnt a number then return
+        return;
+    } else {// push the number after parsing it
+    const display = document.querySelector('.operation');
+    const content = document.createElement('div');
+    content.classList.add('remove');
+    
+    let thisContent = parseFloat(`${e.key}`)
+    content.textContent = (`${thisContent}`)
+    display.appendChild(content)
+    numberStore.push((parseFloat(`${e.key}`)))
+    }
+    
      
 }
 
@@ -218,11 +232,11 @@ function getEquals() {//this does the equals operation and allows us to use oper
         content.textContent = `${operationNumbers}`
         currentAnswer.push(`${operationNumbers}`)
     } else {
-        let roundedAnswer = Math.round((operate(operationNumbers)+ Number.EPSILON) * 100) / 100;
+        let roundedAnswer = Math.round((operate(operationNumbers)+ Number.EPSILON)*100) / 100;
         content.textContent = `${roundedAnswer}`;
     }
     // content.textContent = `${operate(operationNumbers)}`;
-    currentAnswer.push(parseInt(`${operate(operationNumbers)}`));
+    currentAnswer.push(parseFloat(`${operate(operationNumbers)}`));
     numberStore.push(currentAnswer[0]);
     answer.appendChild(content);
     operationNumbers = [];
@@ -264,18 +278,27 @@ function clearEverythingEsc (e) {
     }
 }
 
+function backSpace() {
+    const eraser = document.querySelector('.eraser');
+    eraser.addEventListener('click', function(e) {
+        numberStore.pop();
+        const operations = document.querySelector('.operation');
+        operations.removeChild(operations.lastChild);
+    })
+}
+
 
 function calculator() {
     getNumberOnScreen();
     operators();
     doEqualsOperatorScreen();
     clearEverything();
+    backSpace();
 }
 
 calculator();
 
 window.addEventListener('keydown',function(e) {
-(e.key)
   if (e.key == '/'||e.key == '*'||e.key == '+'||e.key == '-') {
     doOperationFromKeyboard (e);
   } else if (e.key == '=' || e.key == 'Enter') {

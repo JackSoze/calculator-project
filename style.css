@@ -6,7 +6,7 @@ body {
 .calculator {
     display: flex;
     flex-flow: column nowrap;
-    height: 550px;
+    height: 620px;
     width: 600px;
     background-color: rgb(148, 143, 76);
     align-self: center;
@@ -58,13 +58,14 @@ body {
   border-radius: .5rem;
   margin: 10px;
   font-size: 1.5rem;
-  padding: 1rem .5rem;
+  padding: 1rem 20px;
   transition: all .07s ease;
   width: 150px;
   text-align: center;
   color: white;
   background: rgba(110, 59, 59, 0.4);
-  text-shadow: 0 0 .5rem black
+  text-shadow: 0 0 .5rem black;
+  margin: auto;
 }
 
  
@@ -87,5 +88,19 @@ button {
   color: white;
   background: rgba(0,0,0,0.4);
   text-shadow: 0 0 .5rem black
+}
+
+.eraser {
+    border: .4rem solid black;
+    border-radius: .5rem;
+    margin: 10px;
+    font-size: 1.5rem;
+    padding: 1rem .5rem;
+    transition: all .07s ease;
+    width: 150px;
+    text-align: center;
+    color: white;
+    background: rgba(0,0,0,0.4);
+    text-shadow: 0 0 .5rem black 
 }
 
