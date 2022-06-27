@@ -74,21 +74,22 @@ function getNumberOnScreen() {
 }
 
 function getNumberOnKeyboard(e) {
-    // const number = document.querySelector(`.number[data-key='${e.keyCode}']`);
-
+    const isNumber = isFinite(e.key);
+    if (!isNumber) {return}
     const display = document.querySelector('.operation');
     const content = document.createElement('div');
     content.classList.add('remove');
+    
     let thisContent = parseInt(`${e.key}`)
     content.textContent = (`${thisContent}`)
     display.appendChild(content)
     numberStore.push((parseInt(`${e.key}`)))
+     
 }
 
 function doOperationFromKeyboard(e) {
     const display = document.querySelector('.operation');
     const firstOperand = document.createElement('div');
-console.log(e.key);
     const content = document.createElement('div');
     content.classList.add('remove')
 
