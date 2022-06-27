@@ -46,6 +46,7 @@ function operate ([a, operator, b]) {
             return multiplySingles(a,b);
             break;
         default:
+            return;
             console.log('syntax error')
     }
 }
@@ -87,7 +88,7 @@ function getNumberOnKeyboard(e) {
      
 }
 
-function doOperationFromKeyboard(e) {
+function doOperationFromKeyboard(e) { //todo: optimize here by creating a single function that can be used as callback
     const display = document.querySelector('.operation');
     const firstOperand = document.createElement('div');
     const content = document.createElement('div');
@@ -198,6 +199,7 @@ function doEqualsOperatorScreen() { //this runs the equals button
 
 function doEqualsKeyboardKey (e) {
     getEquals();
+  
 }
 
 function getEquals() {//this does the equals operation and allows us to use operators to run  equals
@@ -213,7 +215,10 @@ function getEquals() {//this does the equals operation and allows us to use oper
     const content = document.createElement('div');
     
     if (`${operate(operationNumbers)}` == 'undefined') {
-        content.textContent = 'syntax error'
+        // content.textContent = 'syntax error';
+        content.textContent = `${operationNumbers}`
+        console.log(operationNumbers);
+        console.log(`${operate(operationNumbers)}`)
     } else {
         let roundedAnswer = Math.round((operate(operationNumbers)+ Number.EPSILON) * 100) / 100;
         content.textContent = `${roundedAnswer}`;
@@ -256,7 +261,7 @@ calculator();
 window.addEventListener('keydown',function(e) {
   if (e.key == '/'||e.key == '*'||e.key == '+'||e.key == '-') {
     doOperationFromKeyboard (e);
-  } else if (e.key == '=' || e.key == 'enter') {
+  } else if (e.key == '=' || e.key == 'Enter') {
     doEqualsKeyboardKey (e);
   } else if (e.key != '=') {
     getNumberOnKeyboard(e);
