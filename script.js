@@ -84,6 +84,59 @@ function getNumberOnKeyboard(e) {
     display.appendChild(content)
     numberStore.push((parseInt(`${e.key}`)))
 }
+
+function doOperationFromKeyboard(e) {
+    const display = document.querySelector('.operation');
+    const firstOperand = document.createElement('div');
+console.log(e.key);
+    const content = document.createElement('div');
+    content.classList.add('remove')
+
+    let useAsEquals = function () { //use operator as equals on stringed calcs
+        if (operationNumbers.length == '2') {
+            getEquals();
+        }
+        return; 
+    };
+    
+    useAsEquals(); 
+   
+    let determineCurrent = function() { //fixes the current value to either 
+        if (conversion([numberStore]) == undefined) { //..the joined numbers 
+            return numberStore[0];                    //..from numberstore or 
+        } else {                                      //..the current answer from an operation
+            return conversion([numberStore]);
+        }
+
+    } 
+    current = determineCurrent();
+
+    let element = document.querySelector(".operation");// clear operation display
+    while (element.firstChild) {
+     element.removeChild(element.firstChild);
+    }
+
+    operationNumbers.push(current);//converted to multidigits and pushed to opnumbers
+    numberStore = [];//resets the number store array to 0
+    
+    currentAnswer = [];
+    operationNumbers.push(`${e.key}`)
+    firstOperand.textContent = operationNumbers[0];
+    display.appendChild(firstOperand);
+
+    content.textContent = (`${e.key}`)
+    display.appendChild(content);
+    
+
+
+}
+//function to run the equals operator
+function doEqualsOperatorScreen() { //this runs the equals button
+    const equals = document.querySelector('.equals');
+    equals.addEventListener('click',function(e) {
+    getEquals();
+})
+}
 //function to populate and store the symbols
 function operators () {
     const controls = document.querySelectorAll('.control');
@@ -131,6 +184,8 @@ function operators () {
     display.appendChild(content);
 
 }))
+
+
 }
 //function to run the equals operator
 function doEqualsOperatorScreen() { //this runs the equals button
@@ -198,9 +253,11 @@ function calculator() {
 calculator();
 
 window.addEventListener('keydown',function(e) {
-  if (e.key != '=') {
-    getNumberOnKeyboard(e);
+  if (e.key == '/'||e.key == '*'||e.key == '+'||e.key == '-') {
+    doOperationFromKeyboard (e);
   } else if (e.key == '=' || e.key == 'enter') {
     doEqualsKeyboardKey (e);
-  }
-})
+  } else if (e.key != '=') {
+    getNumberOnKeyboard(e);
+  } 
+  })
