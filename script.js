@@ -47,7 +47,7 @@ function operate ([a, operator, b]) {
             break;
         default:
             return;
-            console.log('syntax error')
+        ('syntax error')
     }
 }
 
@@ -215,10 +215,7 @@ function getEquals() {//this does the equals operation and allows us to use oper
     const content = document.createElement('div');
     
     if (`${operate(operationNumbers)}` == 'undefined') {
-        // content.textContent = 'syntax error';
         content.textContent = `${operationNumbers}`
-        console.log(operationNumbers);
-        console.log(`${operate(operationNumbers)}`)
     } else {
         let roundedAnswer = Math.round((operate(operationNumbers)+ Number.EPSILON) * 100) / 100;
         content.textContent = `${roundedAnswer}`;
@@ -229,6 +226,7 @@ function getEquals() {//this does the equals operation and allows us to use oper
     answer.appendChild(content);
     operationNumbers = [];
 }
+
 //function to clear everything
 function clearEverything () {
     const clearEverything = document.querySelector('.clear');
@@ -249,6 +247,23 @@ function clearEverything () {
 })
 }
 
+function clearEverythingEsc (e) {
+    operationNumbers = [];
+    numberStore = [];
+    currentAnswer = [];
+
+    let element = document.querySelector(".operation");// clear operation display
+    while (element.firstChild) {
+     element.removeChild(element.firstChild);
+    }
+
+    let element2 = document.querySelector(".results");// clear results display
+    while (element2.firstChild) {
+     element2.removeChild(element2.firstChild);
+    }
+}
+
+
 function calculator() {
     getNumberOnScreen();
     operators();
@@ -259,11 +274,14 @@ function calculator() {
 calculator();
 
 window.addEventListener('keydown',function(e) {
+(e.key)
   if (e.key == '/'||e.key == '*'||e.key == '+'||e.key == '-') {
     doOperationFromKeyboard (e);
   } else if (e.key == '=' || e.key == 'Enter') {
     doEqualsKeyboardKey (e);
-  } else if (e.key != '=') {
+  } else if (e.key == 'Escape') {
+    clearEverythingEsc(e);
+  }else if (e.key != '=') {
     getNumberOnKeyboard(e);
   } 
   })
