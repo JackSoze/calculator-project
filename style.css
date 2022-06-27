@@ -6,9 +6,9 @@ body {
 .calculator {
     display: flex;
     flex-flow: column nowrap;
-    height: 100vh;
+    height: 550px;
     width: 600px;
-    background-color: blueviolet;
+    background-color: rgb(148, 143, 76);
     align-self: center;
     border: 2px solid black;
 }
@@ -21,7 +21,7 @@ body {
     background-color: aliceblue;
     justify-content: space-around;
     align-items: flex-end;
-      padding-right: 20px;
+    padding-right: 20px;
 }
 
 .results-header .operation {
@@ -39,12 +39,18 @@ body {
 .controls {
     display: flex;
     flex-flow: row nowrap;
-    justify-content: space-between;
+    justify-content: space-around;
+    margin-top: 7px;
 }
 
 .numbers {
     display: flex;
     flex-flow: row wrap;
+}
+
+.number.clear {
+    border: .4rem solid rgb(235, 12, 12);
+    border-radius: .5rem;
 }
 
 .equals {
@@ -65,8 +71,8 @@ body {
 
 button {
     padding: 20px 50px;
-    border: .4rem solid blue;
-    border-radius: 10px;
+    border: .2rem solid blue;
+    border-radius: 20px;
 }
 
 .number {

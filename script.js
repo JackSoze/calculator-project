@@ -216,6 +216,7 @@ function getEquals() {//this does the equals operation and allows us to use oper
     
     if (`${operate(operationNumbers)}` == 'undefined') {
         content.textContent = `${operationNumbers}`
+        currentAnswer.push(`${operationNumbers}`)
     } else {
         let roundedAnswer = Math.round((operate(operationNumbers)+ Number.EPSILON) * 100) / 100;
         content.textContent = `${roundedAnswer}`;
