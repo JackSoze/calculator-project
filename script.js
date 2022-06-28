@@ -102,6 +102,24 @@ function getNumberOnKeyboard(e) {
      
 }
 
+function check() {
+    if (isNaN(operationNumbers[0])) {
+        operationNumbers = [];//todo: optimize here rep2
+        numberStore = [];
+        currentAnswer = [];
+    
+        let element = document.querySelector(".operation");// clear operation display
+        while (element.firstChild) {
+         element.removeChild(element.firstChild);
+        }
+    
+        let element2 = document.querySelector(".results");// clear results display
+        while (element2.firstChild) {
+         element2.removeChild(element2.firstChild);
+        }
+    }
+}
+
 function doOperationFromKeyboard(e) { //todo: optimize here by creating a single function that can be used as callback
     const display = document.querySelector('.operation');
     const firstOperand = document.createElement('div');
@@ -118,8 +136,9 @@ function doOperationFromKeyboard(e) { //todo: optimize here by creating a single
     useAsEquals(); 
    
     let determineCurrent = function() { //fixes the current value to either 
-        if (conversion([numberStore]) == undefined) { //..the joined numbers 
-            return numberStore[0];                    //..from numberstore or 
+        if (conversion([numberStore]) == 'undefined') { //..the joined numbers 
+            console.log('yes');
+            return conversion([numberStore]);                    //..from numberstore or 
         } else {                                      //..the current answer from an operation
             return conversion([numberStore]);
         }
@@ -236,7 +255,8 @@ function getEquals() {//this does the equals operation and allows us to use oper
         content.textContent = `${roundedAnswer}`;
     }
     // content.textContent = `${operate(operationNumbers)}`;
-    currentAnswer.push(parseFloat(`${operate(operationNumbers)}`));
+    let roundedAnswer = Math.round((operate(operationNumbers)+ Number.EPSILON)*100) / 100;
+    currentAnswer.push(parseFloat(`${roundedAnswer}`));
     numberStore.push(currentAnswer[0]);
     answer.appendChild(content);
     operationNumbers = [];
@@ -246,7 +266,7 @@ function getEquals() {//this does the equals operation and allows us to use oper
 function clearEverything () {
     const clearEverything = document.querySelector('.clear');
     clearEverything.addEventListener('click', function(e) {
-    operationNumbers = [];
+    operationNumbers = [];//todo: optimize here rep2
     numberStore = [];
     currentAnswer = [];
 
@@ -265,7 +285,7 @@ function clearEverything () {
 function clearEverythingEsc (e) {
     operationNumbers = [];
     numberStore = [];
-    currentAnswer = [];
+    currentAnswer = [];//todo: optimize here rep2
 
     let element = document.querySelector(".operation");// clear operation display
     while (element.firstChild) {
@@ -293,12 +313,17 @@ function backSpace() {
             operationNumbers = [];
             const operations = document.querySelector('.operation');
             operations.removeChild(operations.lastChild);
+        } else if (numberStore.length == 0 && operationNumbers.length == 0) {
+            let element2 = document.querySelector(".results");// clear results display
+            while (element2.firstChild) {
+             element2.removeChild(element2.firstChild);
+            }
         }
     })
 }
 
-
 function calculator() {
+    check();
     getNumberOnScreen();
     operators();
     doEqualsOperatorScreen();
