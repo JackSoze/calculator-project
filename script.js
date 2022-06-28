@@ -65,6 +65,9 @@ function conversion ([numbers]) {//clicked numbers pushed to numberstore as an a
 function getNumberOnScreen() {
     const numbers = document.querySelectorAll('.number');
     numbers.forEach(number => number.addEventListener('click', function(e){
+    if (currentAnswer.length > 0) {
+        return;
+    }      
     const display = document.querySelector('.operation');
     const content = document.createElement('div');
     content.classList.add('remove')
@@ -75,6 +78,9 @@ function getNumberOnScreen() {
 }
 
 function getNumberOnKeyboard(e) {
+    if (currentAnswer.length > 0) {
+        return;
+    }
     const isNumber = isFinite(e.key) 
 
     if (e.key == '.' ) { // to push . without parsing it

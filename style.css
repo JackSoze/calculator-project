@@ -1,13 +1,14 @@
 body {
     display: flex;
     flex-flow: column nowrap;
+    background-color: gray
 }
 
 .calculator {
     display: flex;
     flex-flow: column nowrap;
-    height: 620px;
-    width: 600px;
+    height: 580px;
+    width: 490px;
     background-color: rgb(148, 143, 76);
     align-self: center;
     border: 2px solid black;
@@ -38,9 +39,10 @@ body {
 
 .controls {
     display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-around;
-    margin-top: 7px;
+    flex-flow: row wrap;
+   
+   
+    
 }
 
 .numbers {
@@ -51,29 +53,46 @@ body {
 .number.clear {
     border: .4rem solid rgb(235, 12, 12);
     border-radius: .5rem;
+    width: 120px;
+}
+.number.clear:hover {
+    background-color:rgba(0,0,0,0.6);
 }
 
 .equals {
-  border: .4rem solid rgb(250, 245, 245);
+  border: .4rem solid black;
   border-radius: .5rem;
   margin: 10px;
   font-size: 1.5rem;
-  padding: 1rem 20px;
+  padding: 1rem .5rem;
   transition: all .07s ease;
-  width: 150px;
+  width: 80px;
   text-align: center;
   color: white;
-  background: rgba(110, 59, 59, 0.4);
-  text-shadow: 0 0 .5rem black;
-  margin: auto;
+  background: rgba(0,0,0,0.4);
+  text-shadow: 0 0 .5rem black
+}
+.equals:hover {
+    background-color:rgba(0,0,0,0.6);
 }
 
  
 
 button {
-    padding: 20px 50px;
-    border: .2rem solid blue;
-    border-radius: 20px;
+    border: .4rem solid rgb(100, 120, 158);
+    border-radius: .5rem;
+    margin: 10px;
+    font-size: 1.5rem;
+    padding: 1rem .5rem;
+    transition: all .07s ease;
+    width: 80px;
+    text-align: center;
+    color: white;
+    background: rgba(0,0,0,0.4);
+    text-shadow: 0 0 .5rem black    
+}
+button:hover {
+    background-color:rgba(0,0,0,0.6);
 }
 
 .number {
@@ -83,11 +102,14 @@ button {
   font-size: 1.5rem;
   padding: 1rem .5rem;
   transition: all .07s ease;
-  width: 150px;
+  width: 80px;
   text-align: center;
   color: white;
   background: rgba(0,0,0,0.4);
   text-shadow: 0 0 .5rem black
+}
+.number:hover {
+    background-color:rgba(0,0,0,0.6);
 }
 
 .eraser {
@@ -97,10 +119,30 @@ button {
     font-size: 1.5rem;
     padding: 1rem .5rem;
     transition: all .07s ease;
-    width: 150px;
+    width: 120px;
     text-align: center;
     color: white;
     background: rgba(0,0,0,0.4);
     text-shadow: 0 0 .5rem black 
+}
+.eraser:hover {
+    background-color:rgba(0,0,0,0.6);
+}
+
+.thirdPlane {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.others {
+    display: flex;
+    flex: auto;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
+
+.calculator-digits {
+    display: flex;
+    flex-flow: row nowrap;
 }
 
