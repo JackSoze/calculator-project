@@ -247,7 +247,7 @@ function getEquals() {//this does the equals operation and allows us to use oper
     if(numberStore.length <= 0) {
         return;
     }
-    
+
     let element = document.querySelector(".results");
     while (element.firstChild) {
      element.removeChild(element.firstChild);
@@ -334,6 +334,27 @@ function backSpace() {
     })
 }
 
+function backSpaceKbd (e) {
+    if (currentAnswer.length > 0) {
+        return;
+    } else if (numberStore.length > 0) {
+        numberStore.pop();
+        const operations = document.querySelector('.operation');
+        operations.removeChild(operations.lastChild);
+    } else if (operationNumbers.length > 0) {
+        operationNumbers.pop();
+        numberStore.push(operationNumbers[0]);
+        operationNumbers = [];
+        const operations = document.querySelector('.operation');
+        operations.removeChild(operations.lastChild);
+    } else if (numberStore.length == 0 && operationNumbers.length == 0) {
+        let element2 = document.querySelector(".results");// clear results display
+        while (element2.firstChild) {
+         element2.removeChild(element2.firstChild);
+        }
+    }
+}
+
 function calculator() {
     check();
     getNumberOnScreen();
@@ -352,7 +373,9 @@ window.addEventListener('keydown',function(e) {
     doEqualsKeyboardKey (e);
   } else if (e.key == 'Escape') {
     clearEverythingEsc(e);
-  }else if (e.key != '=') {
+  } else if (e.key == 'Backspace') {
+    backSpaceKbd(e);
+  } else if (e.key != '=') {
     getNumberOnKeyboard(e);
   } 
   })
