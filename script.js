@@ -281,9 +281,17 @@ function clearEverythingEsc (e) {
 function backSpace() {
     const eraser = document.querySelector('.eraser');
     eraser.addEventListener('click', function(e) {
-        numberStore.pop();
-        const operations = document.querySelector('.operation');
-        operations.removeChild(operations.lastChild);
+        if (numberStore.length > 0) {
+            numberStore.pop();
+            const operations = document.querySelector('.operation');
+            operations.removeChild(operations.lastChild);
+        } else if (operationNumbers.length > 0) {
+            operationNumbers.pop();
+            numberStore.push(operationNumbers[0]);
+            operationNumbers = [];
+            const operations = document.querySelector('.operation');
+            operations.removeChild(operations.lastChild);
+        }
     })
 }
 
