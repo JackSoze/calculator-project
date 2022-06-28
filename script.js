@@ -126,6 +126,10 @@ function doOperationFromKeyboard(e) { //todo: optimize here by creating a single
     const content = document.createElement('div');
     content.classList.add('remove')
 
+    if(numberStore.length <= 0) {
+        return;
+    }
+
     let useAsEquals = function () { //use operator as equals on stringed calcs
         if (operationNumbers.length == '2') {
             getEquals();
@@ -172,7 +176,7 @@ function doEqualsOperatorScreen() { //this runs the equals button
     getEquals();
 })
 }
-//function to populate and store the symbols
+//function to populate and store the symbols on screen
 function operators () {
     const controls = document.querySelectorAll('.control');
     controls.forEach(controller => controller.addEventListener('click', function(e){
@@ -182,6 +186,10 @@ function operators () {
 
     const content = document.createElement('div');
     content.classList.add('remove')
+
+    if(numberStore.length <= 0) {
+        return;
+    }
 
     let useAsEquals = function () { //use operator as equals on stringed calcs
         if (operationNumbers.length == '2') {
@@ -236,6 +244,10 @@ function doEqualsKeyboardKey (e) {
 }
 
 function getEquals() {//this does the equals operation and allows us to use operators to run  equals
+    if(numberStore.length <= 0) {
+        return;
+    }
+    
     let element = document.querySelector(".results");
     while (element.firstChild) {
      element.removeChild(element.firstChild);
