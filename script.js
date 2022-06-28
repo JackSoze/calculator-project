@@ -281,7 +281,9 @@ function clearEverythingEsc (e) {
 function backSpace() {
     const eraser = document.querySelector('.eraser');
     eraser.addEventListener('click', function(e) {
-        if (numberStore.length > 0) {
+        if (currentAnswer.length > 0) {
+            return;
+        } else if (numberStore.length > 0) {
             numberStore.pop();
             const operations = document.querySelector('.operation');
             operations.removeChild(operations.lastChild);
